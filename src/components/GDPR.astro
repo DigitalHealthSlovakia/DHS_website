@@ -1,0 +1,17 @@
+<div id="cookie-banner" style="display: none; position: fixed; bottom: 0; width: 100%; background: #222; color: white; padding: 1rem; text-align: center; z-index: 1000;">
+  <p>This website uses cookies for a better experience. <button id="accept-cookies" style="margin-left: 10px; cursor: pointer;">Accept</button></p>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const btn = document.getElementById('accept-cookies');
+  
+  if (!localStorage.getItem('cookiesAccepted')) {
+    banner.style.display = 'block';
+  }
+
+  btn.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    banner.style.display = 'none';
+  });
+</script>

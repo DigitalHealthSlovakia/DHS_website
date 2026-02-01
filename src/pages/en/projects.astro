@@ -1,0 +1,54 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Projects | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<h1>Current Projects</h1>
+			<p>Digital Health Slovakia is actively involved in several international and national initiatives.</p>
+
+			<section class="project-list">
+				<div class="project-card">
+					<h2>XIA Project</h2>
+					<p>
+						Extending the use of the European Electronic Health Record Exchange Format (EEHRxF). 
+						This project focuses on improving cross-border health data exchange.
+					</p>
+					<a href="https://xia-project.iscte-iul.pt/" target="_blank" rel="noopener noreferrer" class="project-link">
+						Visit Project Website →
+					</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+
+		<style>
+			.container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+			.project-list { margin-top: 2rem; }
+			.project-card { 
+				border: 1px solid #e2e8f0; 
+				padding: 1.5rem; 
+				border-radius: 12px; 
+				background: #f8fafc;
+				border-left: 5px solid #0056b3; 
+			}
+			.project-link { 
+				display: inline-block; 
+				margin-top: 1rem; 
+				color: #0056b3; 
+				font-weight: bold; 
+				text-decoration: none;
+			}
+			.project-link:hover { text-decoration: underline; }
+		</style>
+	</body>
+</html>

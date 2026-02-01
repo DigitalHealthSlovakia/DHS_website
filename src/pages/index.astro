@@ -1,48 +1,292 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 100%;
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 3em 20px;
+			}
+			
+			/* HERO SECTION */
+			.hero {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 60px;
+				margin-bottom: 5rem;
+			}
+			.hero-text {
+				flex: 1;
+			}
+			.hero-text h1 {
+				color: #4b0082;
+				font-size: 3.8rem;
+				line-height: 1.1;
+				margin-bottom: 0.5rem;
+			}
+			.hero-text p.mission-statement {
+				font-size: 1.5rem;
+				line-height: 1.4;
+				color: #1a1a3a;
+				margin-bottom: 1.5rem;
+			}
+			.hl7-logo-container {
+				flex-shrink: 0;
+			}
+			.hl7-logo-container img {
+				width: 240px;
+				height: auto;
+			}
+
+			/* BANNER */
+			.main-banner {
+				width: 100%;
+				margin-bottom: 5rem;
+			}
+			.main-banner img {
+				width: 100%;
+				height: auto;
+				border-radius: 12px;
+				box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+			}
+
+			/* KEY ACTIVITIES - FULL WIDTH BREAKOUT */
+			.activities-strip {
+				background-color: #4b0082;
+				color: #ffffff;
+				padding: 80px 0;
+				margin: 5rem 0;
+				width: 100vw;
+				position: relative;
+				left: 50%;
+				right: 50%;
+				margin-left: -50vw;
+				margin-right: -50vw;
+			}
+			.activities-inner {
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 0 20px;
+			}
+			.activities-inner h2 {
+				text-align: center;
+				font-size: 2.5rem;
+				margin-bottom: 2.5rem;
+				color: #ffffff;
+			}
+			.activities-list {
+				list-style: none;
+				padding: 0;
+			}
+			.activities-list li {
+				font-size: 1.3rem;
+				margin-bottom: 1.2rem;
+				display: flex;
+				align-items: flex-start;
+				gap: 20px;
+			}
+			.activities-list li::before {
+				content: "✓";
+				color: #8134af;
+				font-weight: bold;
+				font-size: 1.5rem;
+				line-height: 1;
+			}
+
+			/* TEAM SECTION */
+			.team-section {
+				margin-bottom: 6rem;
+			}
+			.team-section h2 {
+				text-align: center;
+				color: #4b0082;
+				font-size: 3rem;
+				margin-bottom: 3rem;
+			}
+			.team-grid {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 25px;
+			}
+			.team-card {
+				text-align: center;
+			}
+			.team-card img {
+				width: 160px;
+				height: 160px;
+				border-radius: 50%;
+				border: 5px solid #8134af;
+				object-fit: cover;
+				margin-bottom: 1rem;
+				transition: transform 0.3s ease;
+			}
+			.team-card img:hover {
+				transform: scale(1.05);
+			}
+			.team-card h3 {
+				font-size: 1.1rem;
+				margin: 5px 0;
+				color: #1a1a3a;
+			}
+			.team-card p {
+				font-size: 0.9rem;
+				color: #666;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			/* LOGO GRID SYSTEM */
+			.divider-bar {
+				background-color: #1a1a3a;
+				color: #ffffff;
+				padding: 15px;
+				text-align: center;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				margin: 4rem 0 2.5rem;
+			}
+			.logo-grid {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 30px;
+				align-items: start;
+			}
+			.logo-grid-3 {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 40px;
+				max-width: 900px;
+				margin: 0 auto;
+			}
+			.logo-item {
+				text-align: center;
+			}
+			.logo-container {
+				height: 100px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 15px;
+			}
+			.logo-container img {
+				max-height: 80px;
+				max-width: 100%;
+				object-fit: contain;
+			}
+			.logo-label {
+				display: block;
+				font-size: 0.75rem;
+				font-weight: 900;
+				color: #4b0082;
+				text-transform: uppercase;
+				line-height: 1.3;
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>Welcome to Digital Health Slovakia!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero">
+				<div class="hero-text">
+					<h1>OUR MISSION</h1>
+					<p class="mission-statement">Digital Health Slovakia is a non-profit association focused on promoting and advancing interoperability and standardization of healthcare in Slovakia.</p>
+					<p><strong>HL7 Slovakia</strong> — the Slovak affiliate of HL7 International — is part of Digital Health Slovakia.</p>
+				</div>
+				<div class="hl7-logo-container">
+					<img src="/images/HL7_SK_logo.png" alt="HL7 Slovakia" />
+				</div>
+			</section>
+
+			<div class="main-banner">
+				<img src="/images/About_01_EN.png" alt="Digital Health Strategic Vision" />
+			</div>
+
+			<section class="activities-strip">
+				<div class="activities-inner">
+					<h2>OUR KEY ACTIVITIES</h2>
+					<ul class="activities-list">
+						<li>support of digital health interoperability and standardisation</li>
+						<li>support of sustainable, patient centric healthcare</li>
+						<li>creating a community of digital health standards users and experts</li>
+						<li>promotion of digital health training, research, and innovation</li>
+						<li>cooperation with national and international institutions</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="team-section">
+				<h2>OUR TEAM</h2>
+				<div class="team-grid">
+					<div class="team-card">
+						<img src="/images/Tim_ESa.png" alt="Eva Sabajová" />
+						<h3>Eva Sabajová</h3>
+						<p>President</p>
+					</div>
+					<div class="team-card">
+						<img src="/images/Tim_MJu.png" alt="Michal Juhás" />
+						<h3>Michal Juhás</h3>
+						<p>Vice-President</p>
+					</div>
+					<div class="team-card">
+						<img src="/images/Tim_JKa.jfif" alt="Jozef Kalužay" />
+						<h3>Jozef Kalužay</h3>
+						<p>Executive Council</p>
+					</div>
+					<div class="team-card">
+						<img src="/images/Tim_JJa.png" alt="Jakub Jamnický" />
+						<h3>Jakub Jamnický</h3>
+						<p>Technical Chair</p>
+					</div>
+					<div class="team-card">
+						<img src="/images/Tim_DEt.png" alt="Dmitry Etin" />
+						<h3>Dmitry Etin</h3>
+						<p>Technical Advisor</p>
+					</div>
+				</div>
+			</section>
+
+			<div class="divider-bar">Members of Digital Health Slovakia</div>
+			<div class="logo-grid">
+				<div class="logo-item"><div class="logo-container"><img src="/images/Clenovia_SiemensHealthineers.png"></div><span class="logo-label">Siemens Healthineers</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Clenovia_LFUK.png"></div><span class="logo-label">Faculty of Medicine CU</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Clenovia_AIDental.jpeg"></div><span class="logo-label">AI:Dental</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Clenovia_FirstLineSoftware.jpg"></div><span class="logo-label">First Line Software</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Clenovia_BBraun.png"></div><span class="logo-label">B. Braun Company</span></div>
+			</div>
+
+			<div class="divider-bar">DHS is a Member of</div>
+			<div class="logo-grid-3">
+				<div class="logo-item"><div class="logo-container"><img src="/images/Partneri_HL7International.jpg"></div><span class="logo-label">HL7 International</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Partneri_ECHAlliance.jpg"></div><span class="logo-label">ECHAlliance</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Partneri_HIMSS.png"></div><span class="logo-label">HIMSS</span></div>
+			</div>
+
+			<div class="divider-bar">Supported By</div>
+			<div class="logo-grid">
+				<div class="logo-item"><div class="logo-container"><img src="/images/Podporili_MZSR.gif"></div><span class="logo-label">Ministry of Health SR</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Podporili_NCZI.png"></div><span class="logo-label">NCZI</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Podporili_Dovera.png"></div><span class="logo-label">Dôvera</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Podporili_HL7Austria.png"></div><span class="logo-label">HL7 Austria</span></div>
+				<div class="logo-item"><div class="logo-container"><img src="/images/Podporili_PazitnyKandilaki.png"></div><span class="logo-label">Pazitny & Kandilaki</span></div>
+			</div>
+			
+			<div style="text-align: center; margin-top: 3rem;">
+				<div class="logo-item" style="display: inline-block;">
+					<div class="logo-container"><img src="/images/Podporili_Bezrucova.jfif"></div>
+					<span class="logo-label">Poliklinika Bezručová</span>
+				</div>
+			</div>
 		</main>
 		<Footer />
 	</body>
