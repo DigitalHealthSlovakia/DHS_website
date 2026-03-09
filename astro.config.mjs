@@ -4,7 +4,11 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://digitalhealthslovakia.github.io',
-  base: '/DHS_website/', // MUST have slashes on both sides
+  // Using './' ensures the site works in ANY folder (GitHub or Azure)
+  base: './', 
   trailingSlash: 'always',
+  build: {
+    assets: '_assets'
+  },
   integrations: [mdx(), sitemap()],
 });
