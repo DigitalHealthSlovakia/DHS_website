@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { membershipTiers, contactEmail } from '../../data/pricing';
+import type { MembershipTier } from '../../data/pricing';
+---
+
+<BaseLayout title="Členstvo | Digital Health Slovakia">
+  
+  <div class="content-wrapper" style="padding-top: 3rem;">
+    
+    <h2 style="text-align: left; margin-bottom: 1.5rem;">Prečo sa stať členom?</h2>
+
+          <p style="font-size: 1.2rem; color: var(--text-dark);">
+        Členstvo v Digital Health Slovakia poskytuje vendorom, štátnym inštitúciám, farmaceutickým firmám, poskytovateľom zdravotnej starostlivosti, start-up firmám, konzultačným firmám a ďalším svojim členom mnohé benefity, najmä:
+         </p>
+    
+    <ul class="benefits-list" data-animate style="margin-bottom: 4rem;">
+        <li>Byť súčasťou slovenskej a zároveň medzinárodnej komunity expertov</li>
+        <li>Byť pri zdroji informácií o pripravovaných štandardoch pre interoperabilitu a mať možnosť ich spoluvytvárať</li>
+        <li>Používať ochranné známky HL7 International ako napr. HL7® a FHIR® ako značku kvality pre svoje produkty alebo služby</li>
+        <li>Prístup ku kompletnej špecifikácii štandardov HL7</li>
+        <li>Zľavy na školenia, webináre a stretnutia organizované HL7 International a Digital Health Slovakia</li>
+        <li>Mať prístup k “Best Practices” z rozvinutejších krajín</li>
+        <li>Príležitosti na propagáciu svojich skúseností</li>
+    </ul>
+
+    <h2 style="text-align: center; margin-bottom: 2rem;">Typy členov a ročné Členské</h2>
+    
+    <div class="price-grid" data-animate>
+      {membershipTiers.map((tier: MembershipTier) => (
+        <div class="price-card">
+          <h3>{tier.nameSk}</h3>
+          <span class="price-amount">
+            {tier.price} <span class="currency">{tier.currency}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div style="margin: 5rem 0; text-align: center;" data-animate>
+      <h2 style="margin-bottom: 1.5rem;">Ako sa stať členom?</h2>
+      <p style="font-size: 1.2rem; color: var(--text-dark);">
+        Pre ďaľšie informácie o členstve, prosím, kontaktujte DHS emailom na: 
+        <a href={`mailto:${contactEmail}`} style="color: var(--purple-main); font-weight: 700; text-decoration: underline;">
+          {contactEmail}
+        </a>
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

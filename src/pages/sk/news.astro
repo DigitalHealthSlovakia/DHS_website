@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { newsArticles } from '../../data/news';
+
+const title = "Aktuality | Digital Health Slovakia";
+const today = new Date();
+
+// 1. Logic: Show if it's an "EVENT" (regardless of date) OR if the news date has passed
+const visibleNews = newsArticles
+  .filter(article => {
+    const articleDate = new Date(article.date);
+    // This ensures the DHS Forum stays visible even if it's in the future
+    return article.category.includes("EVENT") || articleDate <= today;
+  })
+  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+
+// 2. Pagination for the first page
+const postsPerPage = 5;
+const firstPageNews = visibleNews.slice(0, postsPerPage);
+const totalPages = Math.ceil(visibleNews.length / postsPerPage);
+---
+
+<BaseLayout title={title}>
+  <div class="content-wrapper" style="padding-top: 2rem;">
+    
+    <header data-animate>
+      <h1>AKTUALITY</h1>
+    </header>
+
+    <div class="news-container" style="margin-top: 4rem;">
+      {firstPageNews.map((article) => (
+        <div class="news-item" data-animate style="margin-bottom: 5rem;">
+          <span class="news-kicker">{article.category}</span>
+          
+          <p class="mission-p" style="margin-top: 0.5rem;">
+            <span>{article.content}</span>
+            
+            <a href={article.link} target="_blank" class="news-inline-link">
+              <strong>{article.linkText}</strong>
+            </a>
+
+            {article.additionalText && <span>{article.additionalText}</span>}
+
+            {article.secondaryLink && (
+              <a href={article.secondaryLink} target="_blank" class="news-inline-link">
+                {article.secondaryLinkText}
+              </a>
+            )}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {/* Only show pagination if there is more than one page */}
+    {totalPages > 1 && (
+      <nav class="pagination">
+        <span>Page 1 of {totalPages}</span>
+        <a href="/en/news/2">Staršie správy &rarr;</a>
+      </nav>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .news-kicker {
+    display: block;
+    color: var(--purple-main);
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+  }
+  .news-inline-link {
+    color: var(--purple-main);
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+  }
+  .news-inline-link:hover { opacity: 0.7; }
+  .news-item { border-bottom: 1px solid #eee; padding-bottom: 3rem; }
+  .news-item:last-child { border-bottom: none; }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+    font-weight: bold;
+  }
+  .pagination a { color: var(--purple-main); text-decoration: none; }
+</style>

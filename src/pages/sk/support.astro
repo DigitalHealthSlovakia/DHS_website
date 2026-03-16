@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const title = "Podporte Nás (2%) | Digital Health Slovakia";
+---
+
+<BaseLayout title={title}>
+  <div class="content-wrapper" style="padding-top: 2rem;">
+    
+    <header data-animate>
+      <h1>PODPORTE NAŠE OBČIANSKE ZDRUŽENIE</h1>
+      <p class="mission-p">
+        Staňte sa súčasťou rozvoja digitálneho zdravotníctva a interoperability na Slovensku. Podporou občianskeho združenia Digital Health Slovakia pomôžete vytvoriť moderný a prepojený zdravotný ekosystém zameraný na občana.      </p>
+    </header>
+
+    <div class="support-grid" data-animate>
+      <section class="tax-box">
+                <h2>Darujte 2% z dane</h2>
+        <p class="support-text">
+          Využite zákonnú možnosť a rozhodnite o osude časti svojich daní. Podľa zákona o dani z príjmov môžete ako daňovník poukázať podiel zaplatenej dane vybranej neziskovej organizácii. Tento mechanizmus vám umožňuje bez akýchkoľvek nákladov navyše podporiť budovanie férovej a odborne podloženej digitálnej infraštruktúry v zdravotníctve.
+        </p>
+        
+        
+
+        <div class="info-card">
+          <h3>Údaje o príjmateľovi 2% z daní</h3>
+          <div class="data-row">
+            <span>IČO:</span>
+            <strong>55139213</strong>
+          </div>
+          <div class="data-row">
+            <span>Právna forma:</span>
+            <strong>Občianske združenie</strong>
+          </div>
+          <div class="data-row">
+            <span>Názov:</span>
+            <strong>Digital Health Slovakia</strong>
+          </div>
+          <div class="data-row">
+            <span>Sídlo:</span>
+            <strong>Lesná 2121/18, 900 31 Stupava</strong>
+          </div>
+          <div class="data-row">
+            <span>Registračné číslo:</span>
+            <strong>VVS/1-900/90-65541</strong>
+          </div>
+          <div class="data-row">
+            <span>Registrový úrad:</span>
+            <strong>Okresný úrad Bratislava</strong>
+          </div>
+        </div>
+
+        <div class="action-area">
+          <a href="/documents/V2Pv25_DHS.pdf" class="download-btn" download>
+            Stiahnuť predvyplnené vyhlásenie (PDF)
+         </a>
+          <p class="small-note">Vyhlásenie o poukázaní podielu zaplatenej dane (V2PV25)</p>
+        </div>
+      </section>
+
+      <aside class="other-support">
+        <h3>Ďalšie formy podpory</h3>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
+           Neustále hľadáme partnerov, ktorí chcú spolu s nami poháňať digitálnu transformáciu a prepájať svet zdravotníctva s IT. Zapojte sa do našich aktivít a pomôžte nám formovať budúcnosť digitálneho zdravotníctva na Slovensku.
+        </p>
+        <ul class="support-list">
+          <li>
+            <strong>Sponzorstvo podujatí:</strong> 
+            Podporte odborné semináre alebo výročné Digital Health Slovakia Forum. Vaša podpora nám umožní rozširovať osvetu v oblasti štandardizácie a prepojí Vašu značku s komunitou expertov.
+          </li>
+          <li>
+            <strong>Expertná spolupráca::</strong> 
+            Staňte sa súčasťou našich technických pracovných skupín. Ako slovenské zastúpenie HL7 vytvárame priestor pre odborníkov, ktorí chcú priamo ovplyvňovať zavádzanie štandardov HL7 a EHDS do praxe.
+          </li>
+          <li>
+            <strong>Členstvo v združení:</strong> 
+            Vstúpte do združenia ako individuálny alebo firemný člen. Získate tak priamy vplyv na smerovanie aktivít O.Z. a prednostný prístup k novinkám z prostredia HL7.
+          </li>
+        </ul>
+        <a href="/en/contact" class="text-link">Mám záujem o spoluprácu &rarr;</a>
+      </aside>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+  }
+
+  .support-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 2.5rem;
+  }
+
+  .info-card {
+    background-color: #fcfcfc;
+    padding: 2.5rem;
+    border: 1px solid #eee;
+    border-top: 4px solid var(--purple-main);
+    border-radius: 4px;
+  }
+
+  .info-card h3 {
+    font-size: 0.8rem;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: #888;
+  }
+
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .data-row:last-child { border-bottom: none; }
+  .data-row strong { color: #000; font-weight: 700; }
+
+  .download-btn {
+    display: inline-block;
+    background-color: var(--purple-main);
+    color: white;
+    padding: 1.2rem 2.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    transition:

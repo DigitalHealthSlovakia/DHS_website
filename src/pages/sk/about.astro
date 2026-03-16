@@ -1,564 +1,106 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+// Data Imports
+import { team } from '../../data/team';
+import { members } from '../../data/members';
+import { affiliations } from '../../data/affiliations';
+import { supporters } from '../../data/supporters';
+
+const title = "O Nás | Digital Health Slovakia";
+const description = "Informácie o O.Z. Digital Health Slovakia, našom poslaní, našom tíme a našich partneroch.";
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<style>
-			main {
-				width: 100%;
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 3em 20px;
-			}
-			
-			/* HERO SECTION */
-			.hero {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 60px;
-				margin-bottom: 5rem;
-			}
-			.hero-text {
-				flex: 1;
-			}
-			.hero-text h1 {
-				color: #4b0082;
-				font-size: 3.8rem;
-				line-height: 1.1;
-				margin-bottom: 0.5rem;
-			}
-			.hero-text p.mission-statement {
-				font-size: 1.5rem;
-				line-height: 1.4;
-				color: #1a1a3a;
-				margin-bottom: 1.5rem;
-			}
-			.hl7-logo-container {
-				flex-shrink: 0;
-			}
-			.hl7-logo-container img {
-				width: 240px;
-				height: auto;
-			}
+<BaseLayout title={title} description={description}>
 
-			/* BANNER */
-			.main-banner {
- 			    display: block;
-                width: 100%;
-                clear: both;     /* Prevents layout bleed from sections above */
-                height: auto;
-                overflow: visible;
-			}
+  <div class="content-wrapper" style="padding-top: 2rem;">
+    <section class="hero-flex" data-animate>
+      <div class="hero-mission-text">
+        <h1>NAŠA MISIA</h1>
+        <p style="font-size: 1.5rem; color: var(--navy-dark); margin-bottom: 1.5rem; line-height: 1.4;">
+          Misiou občianskeho združenia Digital Health Slovakia je podpora štandardizácie v oblasti interoperability v slovenskom zdravotníctve.
+        </p>
+     	 	<p class="mission-p">
+			    Digital Health Slovakia zastrešuje <strong>HL7 Slovensko</strong> ako zastúpenie štandardizačnej organizácie HL7 International na Slovensku.
+      </div>
+      <div class="hl7-logo-box">
+        <img src="/images/HL7_SK_logo.png" alt="HL7 Slovakia Logo" class="hl7-logo-img" />
+      </div>
+    </section>
 
-			.main-banner img {
-  		    	display: block;
-                margin: 0 auto;
-                width: 90%; /* Instead of transform: scale(0.70) */
-                height: auto;
-                max-height: none;
-                min-height: auto;
-                flex-shrink: 0;
-                object-fit: contain;
-                aspect-ratio: auto;
-                aspect-ratio: attr(width) / attr(height);
-			}
+    <div style="margin-bottom: 3rem;" data-animate>
+      <img src="/images/About_01.jpg" alt="Naša vízia je digitálne prepojená a dostupná zdravotná starostlivosť pre všetkých" class="strategic-banner" />
+    </div>
+  </div>
 
-			/* KEY ACTIVITIES - FULL WIDTH BREAKOUT */
-			.activities-strip {
-				background-color: #4b0082;
-				color: #ffffff;
-				padding: 80px 0;
-				margin: 5rem 0;
-				width: 100vw;
-				position: relative;
-				left: 50%;
-				right: 50%;
-				margin-left: -50vw;
-				margin-right: -50vw;
-			}
-			.activities-inner {
-				max-width: 900px;
-				margin: 0 auto;
-				padding: 0 20px;
-			}
-			.activities-inner h2 {
-				text-align: center;
-				font-size: 2.5rem;
-				margin-bottom: 2.5rem;
-				color: #ffffff;
-			}
-			.activities-list {
-				list-style: none;
-				padding: 0;
-			}
-			.activities-list li {
-				font-size: 1.3rem;
-				margin-bottom: 1.2rem;
-				display: flex;
-				align-items: flex-start;
-				gap: 20px;
-			}
-			.activities-list li::before {
-				content: "✓";
-				color: #8134af;
-				font-weight: bold;
-				font-size: 1.5rem;
-				line-height: 1;
-			}
+  <section class="purple-activities-strip" data-animate>
+    <div class="content-wrapper">
+      <h2 style="color: white; margin-bottom: 2rem;">NAŠE AKTIVITY</h2>
+      <ul class="activities-list">
+        <li>Podporujeme interoperabilitu a štandardizáciu v oblasti digitálneho zdravotníctva</li>
+        <li>Podporujeme vytvorenie udržateľného zdravotníctva zameraného na občana</li>
+        <li>Budujeme komunitu používateľov štandardov v oblasti digitálneho zdravotníctva, PPP - public-private-partnerships, a Vytvárame prepojenia medzi oblasťou zdravotníctva a IT</li>
+        <li>Podporujeme vzdelávanie, vedu a výskum v oblasti zdravotníctva</li>
+        <li>Spolupracujeme so zahraničnými a slovenskými inštitúciami a organizáciami, ktoré podporujú rozvoj digitálneho zdravotníctva a interoperability v Európe a vo svete, predovšetkým so štandardizačnými a akreditačnými organizáciami ako HL7 International, HL7 Europe</li>
+      </ul>
+    </div>
+  </section>
 
-			/* TEAM SECTION */
-			.team-section {
-				margin-bottom: 6rem;
-			}
-			.team-section h2 {
-				text-align: center;
-				color: #4b0082;
-				font-size: 3rem;
-				margin-bottom: 3rem;
-			}
-			.team-grid {
-				display: grid;
-				grid-template-columns: repeat(5, 1fr);
-				gap: 25px;
-			}
-			.team-card {
-				text-align: center;
-			}
-			.team-card img {
-				width: 160px;
-				height: 160px;
-				border-radius: 50%;
-				border: 5px solid #8134af;
-				object-fit: cover;
-				margin-bottom: 1rem;
-				transition: transform 0.3s ease;
-			}
-			.team-card img:hover {
-				transform: scale(1.05);
-			}
-			.team-card h3 {
-				font-size: 1.1rem;
-				margin: 5px 0;
-				color: #1a1a3a;
-			}
-			.team-card p {
-				font-size: 0.9rem;
-				color: #666;
-				font-weight: 700;
-				text-transform: uppercase;
-			}
+  <div class="content-wrapper">
+    <section style="padding: 3rem 0;" data-animate>
+      <h2>NÁŠ TÍM</h2>
+      <div class="team-grid">
+        {team.map((person) => (
+          <div class="team-card">
+            <img src={person.img} alt={person.name} />
+            <h3>{person.name}</h3>
+            <p>{person.titleSK}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
 
-			/* PARTNERS SECTION */
-			.partners-section {
-				margin-bottom: 6rem;
-			}
+  <div class="navy-divider">Členovia Digital Health Slovakia</div>
+  <div class="content-wrapper">
+    <div class="logo-flex-row" data-animate>
+      {members.map((member) => (
+        <a href={member.urlSk} target="_blank" rel="noopener noreferrer" class="logo-item">
+          <div class="logo-img-wrapper">
+            <img src={member.logoSk} alt={member.nameSk} />
+          </div>
+          <span class="logo-text-label">{member.nameSk}</span>
+        </a>
+      ))}
+    </div>
+  </div>
 
-			.partners-section h2 {
-				text-align: center;
-				color: #4b0082;
-				font-size: 3rem;
-				margin-bottom: 3rem;
-			}
+  <div class="navy-divider">Digital Health Slovakia je Členom</div>
+  <div class="content-wrapper">
+    <div class="logo-flex-row" data-animate>
+      {affiliations.map((org) => (
+        <a href={org.url} target="_blank" rel="noopener noreferrer" class="logo-item">
+          <div class="logo-img-wrapper">
+            <img src={org.logo} alt={org.name} />
+          </div>
+          <span class="logo-text-label">{org.name}</span>
+        </a>
+      ))}
+    </div>
+  </div>
 
-			/* LOGO GRID SYSTEM */
-			.divider-bar {
-				background-color: #1a1a3a;
-				color: #ffffff;
-				padding: 18px 0;
-				text-align: center;
-				font-weight: 700;
-				text-transform: uppercase;
-				letter-spacing: 2px;
-				margin: 4rem 0 2.5rem;
-				width: 100vw;
-				position: relative;
-				left: 50%;
-				right: 50%;
-				margin-left: -50vw;
-				margin-right: -50vw;
-			}
+  <div class="navy-divider">Založenie HL7 Slovensko pri OZ Digital Health Slovakia podporili zástupcovia</div>
+  <div class="content-wrapper">
+    <div class="logo-flex-row" data-animate>
+      {supporters.map((supporter) => (
+        <a href={supporter.url} target="_blank" rel="noopener noreferrer" class="logo-item">
+          <div class="logo-img-wrapper">
+            <img src={supporter.logo} alt={supporter.nameEn} />
+          </div>
+          <span class="logo-text-label">{supporter.nameEn}</span>
+        </a>
+      ))}
+    </div>
+  </div>
 
-			.divider-inner {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 0 20px;
-			}
-
-			.logo-grid {
-				display: grid;
-				grid-template-columns: repeat(5, 1fr);
-				gap: 30px;
-				align-items: start;
-			}
-			.logo-grid-3 {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 40px;
-				max-width: 900px;
-				margin: 0 auto;
-			}
-			.logo-grid--supported {
-			  	display: flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				gap: 30px;
-			}
-			.logo-grid--supported > a {
-				flex: 0 1 calc(20% - 30px);
-				min-width: 160px;
-				display: flex;
-  				justify-content: center;
-			}
-			.logo-item {
-				text-align: center;
-			}
-			.logo-container {
-				height: 100px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 15px;
-			}
-			.logo-container img {
-				max-height: 80px;
-				max-width: 100%;
-				object-fit: contain;
-			}
-			.logo-label {
-				display: block;
-				font-size: 0.75rem;
-				font-weight: 900;
-				color: #4b0082;
-				text-transform: uppercase;
-				line-height: 1.3;
-			}
-
-
-		/* Scroll animation baseline */
-		[data-animate] {
-		opacity: 0;
-		transform: translateY(30px);
-		}
-
-		.fade-up {
-		opacity: 1;
-		transform: translateY(0);
-		transition:
-			opacity 0.7s ease-out,
-			transform 0.7s ease-out;
-		}
-
-
-
-		@media (max-width: 1024px) {
-		.team-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-
-		.logo-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-		}
-
-		@media (max-width: 640px) {
-		.hero {
-			flex-direction: column;
-			text-align: center;
-			gap: 30px;
-		}
-
-		.hero-text h1 {
-			font-size: 2.6rem;
-		}
-
-		.team-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-
-		.logo-grid,
-		.logo-grid-3 {
-			grid-template-columns: repeat(2, 1fr);
-		}
-
-		.logo-grid--supported > a {
-			flex: 0 1 calc(50% - 30px);
-		}
-		}		
-
-	</style>
-
-		<main>
-			<section class="hero" data-animate>
-				<div class="hero-text">
-					<h1>NAŠA MISIA</h1>
-					<p class="mission-statement">Misiou občianskeho združenia Digital Health Slovakia je podpora štandardizácie v oblasti interoperability v slovenskom zdravotníctve.</p>
-					<p class="mission-statement">Digital Health Slovakia zastrešuje HL7 Slovensko ako zastúpenie štandardizačnej organizácie <strong>HL7 International</strong> na Slovensku.</p>
-				</div>
-				<div class="hl7-logo-container">
-					<img src="/images/HL7_SK_logo.png" alt="HL7 Slovakia" />
-				</div>
-			</section>
-
-			<div class="main-banner">
-				<img src="/images/About_01.jpg" alt="Naša vízia je digitálne prepojená a dostupná zdravotná starostlivosť pre všetkých." />
-			</div>
-
-			<section class="activities-strip" data-animate>
-				<div class="activities-inner">
-					<h2>NAŠE AKTIVITY</h2>
-					<ul class="activities-list">
-					<li>Podporujeme interoperabilitu a štandardizáciu v oblasti digitálneho zdravotníctva</li>
-					<li>Podporujeme vytvorenie udržateľného zdravotníctva zameraného na občana</li>
-					<li>Budujeme komunitu používateľov štandardov v oblasti digitálneho zdravotníctva, PPP - public-private-partnerships, a Vytvárame prepojenia medzi oblasťou zdravotníctva a IT</li>
-					<li>Podporujeme vzdelávanie, vedu a výskum v oblasti zdravotníctva</li>
-					<li>Spolupracujeme so zahraničnými a slovenskými inštitúciami a organizáciami, ktoré podporujú rozvoj digitálneho zdravotníctva a interoperability v Európe a vo svete, predovšetkým so štandardizačnými a akreditačnými organizáciami ako HL7 International, HL7 Europe</li>
-					</ul>
-				</div>
-			</section>
-
-			<section class="team-section" data-animate>
-				<h2>NÁŠ TÍM</h2>
-				<div class="team-grid">
-					<div class="team-card">
-						<img src="/images/Tim_ESa.png" alt="Eva Sabajová" />
-						<h3>Eva Sabajová</h3>
-						<p>Prezidentka</p>
-					</div>
-					<div class="team-card">
-						<img src="/images/Tim_MJu.png" alt="Michal Juhás" />
-						<h3>Michal Juhás</h3>
-						<p>Viceprezident</p>
-					</div>
-					<div class="team-card">
-						<img src="/images/Tim_JKa.jfif" alt="Jozef Kalužay" />
-						<h3>Jozef Kalužay</h3>
-						<p>Člen prezídia</p>
-					</div>
-					<div class="team-card">
-						<img src="/images/Tim_JJa.png" alt="Jakub Jamnický" />
-						<h3>Jakub Jamnický</h3>
-						<p>Predseda technickej komisie</p>
-					</div>
-					<div class="team-card">
-						<img src="/images/Tim_DEt.png" alt="Dmitry Etin" />
-						<h3>Dmitry Etin</h3>
-						<p>Technický poradca</p>
-					</div>
-				</div>
-			</section>
-
-				<section class="partners-section" data-animate>
-					<h2>PARTNERI</h2>
-				
-				<div class="divider-bar">
-  					<div class="divider-inner">
-  						  Členovia Digital Health Slovakia
-					</div>
-				</div>
-				
-				<div class="logo-grid--supported">
-			
-				    <a href="https://www.siemens-healthineers.com/sk" target="_blank" rel="noopener">
-				      <div class="logo-item">
-				        <div class="logo-container">
-				          <img src="/images/Clenovia_SiemensHealthineers.png" alt="Siemens Healthineers Slovakia">
-			        	</div>
-			    	    <span class="logo-label">Siemens Healthineers Slovakia</span>
-				      </div>
-				    </a>
-
-				    <a href="https://www.fmed.uniba.sk/en/" target="_blank" rel="noopener">
-				      <div class="logo-item">
-			    	    <div class="logo-container">
-				          <img src="/images/Clenovia_LFUK.png" alt="Lekárska fakulta Univerzity Komenského">
-				        </div>
-				        <span class="logo-label">Lekárska fakulta Univerzity Komenského</span>
-				      </div>
-			    	</a>
-
-				    <a href="https://www.aidental.ai/" target="_blank" rel="noopener">
-				      <div class="logo-item">
-				        <div class="logo-container">
-				          <img src="/images/Clenovia_AIDental.jpeg" alt="AI:Dental">
-			        	</div>
-			    	    <span class="logo-label">AI:Dental</span>
-				      </div>
-				    </a>
-
-				    <a href="https://firstlinesoftware.com/" target="_blank" rel="noopener">
-				      <div class="logo-item">
-			        	<div class="logo-container">
-			    	      <img src="/images/Clenovia_FirstLineSoftware.jpg" alt="First Line Software">
-				        </div>
-				        <span class="logo-label">First Line Software</span>
-				      </div>
-				    </a>
-
-			    	<a href="https://www.bbraun.sk/sk.html" target="_blank" rel="noopener">
-			     	 <div class="logo-item">
-			        	<div class="logo-container">
-			          	<img src="/images/Clenovia_BBraun.png" alt="B. Braun SK">
-			        	</div>
-			    	    <span class="logo-label">B. Braun SK</span>
-				      </div>
-				    </a>
-
-			 	<a href="https://www.dha.sk/dha-digital-healthcare-advisory/" target="_blank" rel="noopener">
-			     	 <div class="logo-item">
-			        	<div class="logo-container">
-			          	<img src="/images/Clenovia_digitalhealthadvisory.png" alt="digital health advisory">
-			        	</div>
-			    	    <span class="logo-label">digital health advisory</span>
-				      </div>
-				    </a>
-
-			    	<a href="https://biobankslovakia.jlfuk.sk/" target="_blank" rel="noopener">
-			     	 <div class="logo-item">
-			        	<div class="logo-container">
-			          	<img src="/images/Clenovia_JLF_SK.png" alt="Biobanka pre nádorové a zriedkavé ochorenia">
-			        	</div>
-			    	    <span class="logo-label">Biobanka pre nádorové a zriedkavé ochorenia</span>
-				      </div>
-				    </a>					
-
-				</div>
-
-
-				<div class="divider-bar">
-  					<div class="divider-inner">
-  						  Digital Health Slovakia je Členom
-					</div>
-				</div>
-
-				  <div class="logo-grid-3">
-				    <a href="https://www.hl7.org/" target="_blank" rel="noopener">
-				      <div class="logo-item">
-				        <div class="logo-container">
-			        	  <img src="/images/Partneri_HL7International.jpg" alt="HL7 International">
-			    	    </div>
-				        <span class="logo-label">HL7 International</span>
-				      </div>
-				    </a>
-
-				    <a href="https://globalhealthconnector.com/" target="_blank" rel="noopener">
-			    	  <div class="logo-item">
-				        <div class="logo-container">
-				          <img src="/images/Partneri_GlobalHealthConnector.png" alt="Global Health Connector">
-				        </div>
-				        <span class="logo-label">Global Health Connector</span>
-				      </div>
-				    </a>
-
-				    <a href="https://www.himss.org/" target="_blank" rel="noopener">
-				      <div class="logo-item">
-				        <div class="logo-container">
-				          <img src="/images/Partneri_HIMSS.png" alt="HIMSS">
-				        </div>
-				        <span class="logo-label">HIMSS</span>
-				      </div>
-				    </a>
-				  </div>
-
-				<div class="divider-bar">
-  					<div class="divider-inner">
-  						  Založenie HL7 Slovensko pri OZ Digital Health Slovakia podporili zástupcovia
-					</div>
-				</div>
-
-				<div class="logo-grid logo-grid--supported">
-
-  				<a href="https://www.fmed.uniba.sk/en/" target="_blank" rel="noopener">
-  				  <div class="logo-item">
-  				    <div class="logo-container">
- 				       <img src="/images/Clenovia_LFUK.png" alt="Lekárska fakulta Univerzity Komenského">
-  				    </div>
-  				    <span class="logo-label">Lekárska fakulta Univerzity Komenského</span>
- 				   </div>
-				  </a>
-
- 				 <a href="https://www.poliklinikabezrucova.sk/" target="_blank" rel="noopener">
- 				   <div class="logo-item">
-  				    <div class="logo-container">
-  				      <img src="/images/Podporili_Bezrucova.jfif" alt="Poliklinika Bezručová">
-  				    </div>
-  				    <span class="logo-label">Poliklinika Bezručová</span>
-  				  </div>
-				  </a>
-
- 				 <a href="https://www.dovera.sk/" target="_blank" rel="noopener">
-  				  <div class="logo-item">
-   				   <div class="logo-container">
-  				      <img src="/images/Podporili_Dovera.png" alt="Dôvera zdravotná poisťovňa">
-  				    </div>
-  				    <span class="logo-label">Dôvera zdravotná poisťovňa</span>
- 				   </div>
-				  </a>
-
- 				 <a href="https://www.nczisk.sk/" target="_blank" rel="noopener">
-  				  <div class="logo-item">
-  				    <div class="logo-container">
-   				     <img src="/images/Podporili_NCZI.png" alt="Národné centrum zdravotníckych informácií">
-   				   </div>
-   				   <span class="logo-label">Národné centrum zdravotníckych informácií</span>
-  				  </div>
- 				 </a>
-
- 				 <a href="https://healthcareconsulting.sk/" target="_blank" rel="noopener">
-  				  <div class="logo-item">
- 				     <div class="logo-container">
- 				       <img src="/images/Podporili_PazitnyKandilaki.png" alt="Pažitný & Kandilaki">
-  				    </div>
-  				    <span class="logo-label">Pažitný & Kandilaki Healthcare Consulting</span>
- 	 			  </div>
- 				 </a>
-
- 				 <a href="https://health.gov.sk/" target="_blank" rel="noopener">
-  				  <div class="logo-item">
-   			    <div class="logo-container">
-    			     <img src="/images/Podporili_MZSR.gif" alt="Ministerstvo zdravotníctva Slovenskej republiky">
-   			    </div>
-   			    <span class="logo-label">Ministerstvo zdravotníctva Slovenskej republiky</span>
-   			  </div>
-  			 </a>
-
- 			  <a href="https://hl7.at/" target="_blank" rel="noopener">
-  			   <div class="logo-item">
-   			    <div class="logo-container">
-   			      <img src="/images/Podporili_HL7Austria.png" alt="HL7 Austria">
-   			    </div>
-   			    <span class="logo-label">HL7 Austria</span>
-  			   </div>
-  			 </a>
-
- 			</div>
-
-
-		</section>
-
-
-		</main>
-
-		<script>
-		const observer = new IntersectionObserver(
-			entries => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-				entry.target.classList.add('fade-up');
-				observer.unobserve(entry.target);
-				}
-			});
-			},
-			{ threshold: 0.15 }
-		);
-
-		document.querySelectorAll('[data-animate]').forEach(el => {
-			observer.observe(el);
-		});
-		</script>
-
-
-        
-
-        </BaseLayout>
+</BaseLayout>

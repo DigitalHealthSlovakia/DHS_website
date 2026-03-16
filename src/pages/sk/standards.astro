@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Štandardy HL7 | Digital Health Slovakia";
+---
+
+<BaseLayout title={title}>
+  
+  <div class="content-wrapper" style="padding-top: 2rem;">
+    
+<section class="hero-flex" data-animate style="align-items: flex-start; gap: 4rem;">
+      <div class="hero-mission-text" style="flex: 1.5;">
+        <h1>ČO JE HL7?</h1>
+        <p class="mission-p">
+          HL7 a jeho členovia poskytujú rámec (a súvisiace normy) pre výmenu, integráciu, zdieľanie a získavanie elektronických zdravotných údajov. Tieto normy definujú spôsob výmeny informácií z jednej strany k druhej, nastavujú jazyk, štruktúru a typy údajov potrebné pre bezproblémovú integráciu medzi systémami. Normy HL7 podporujú klinickú prax a riadenie, poskytovanie a hodnotenie zdravotných služieb. Používanie HL7 noriem je vo svete najrozšírenejšie. 
+        </p>
+      </div>
+      
+      <div class="hl7-logo-box" style="flex: 1; display: flex; justify-content: flex-end;">
+        <img 
+          src="/images/Partneri_HL7International.jpg" 
+          alt="HL7 International Partner" 
+          class="interactive-logo"
+        />
+      </div>
+    </section>
+
+<div style="margin-top: 4rem;" data-animate>
+      <h2>HL7 International</h2>
+      <ul class="activities-list">
+        <li>Organizácia založená 1987 v USA</li>
+        <li>Aktuálne zastúpenie vo viac ako 50 krajinách</li>
+        <li>Od 1994 akreditovaná ako SDOs (Standards Developing Organizations) v zdravotníctve zo strany ANSI a ISO</li>
+        <li>Nezisková organizácia, dobrovoľní členovia zo strany PZS, vendorov, univerzít, poradcov a iných zainteresovaných strán</li>
+        <li>Členovia z viac ako 50 krajín</li>
+        <li>
+          <span>Ďalšie informácie o štandarde HL7 nájdete na web stránkach <a href="https://www.hl7.org/implement/standards/index.cfm?ref=nav" target="_blank" style="color: var(--purple-main); text-decoration: underline;">HL7 International</a></span>
+      </li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 3rem;" data-animate>
+      <h2>HL7 Europe</h2>
+      <ul class="activities-list">
+        <li><span>Zastúpenie v 22 krajinách</span></li>
+        <li><span>Podpora HL7 štandardov zo strany Európskej komisie</span></li>
+        <li><span>HL7 Europe je zapojené do väčšiny európskych projektov v oblasti interoperability</span></li>
+        <li><span>HL7 štandardy (CDA, FHIR) – sa používajú pri cezhraničnej výmene zdravotnej dokumentácie (ePrescription/eDispensation, Patient Summary) a sú plánované pre nové scenáre (eLAB, Hospital Discharge Reports, PAX, PAX Reports)</span></li>
+        <li>
+          <span>Ďalšie informácie o HL7 Europe sú dostupné na ich <a href="https://www.hl7.eu/" target="_blank" style="color: var(--purple-main); text-decoration: underline;">web stránke</a>.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 3rem; margin-bottom: 5rem;" data-animate>
+      <h2>Nástroje a školenia</h2>
+      <ul class="activities-list">
+        <li>
+          <span>Ďalšie informácie k nástrojom HL7 sú dostupné na stránke <a href="http://www.hl7.org/participate/toolsandresources.cfm" target="_blank" style="color: var(--purple-main); text-decoration: underline;">HL7 International</a>.</span>
+        </li>
+        <li>
+          <span>Ďalšie informácie k školeniam k HL7 sú dostupné na stránke <a href="http://www.hl7.org/training/index.cfm" target="_blank" style="color: var(--purple-main); text-decoration: underline;">HL7 International</a>.</span>
+        </li>
+      </ul>
+    </div>
+
+    <footer style="border-top: 1px solid #eee; padding-top: 2rem; margin-top: 5rem; font-size: 0.9rem; color: #666; padding-bottom: 2rem;">
+      <p>® Health Level Seven and HL7 are registered trademarks of Health Level Seven International, registered with the United States Patent and Trademark Office.</p>
+    </footer>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .interactive-logo {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    object-fit: contain;
+    /* Smooth transition for the scaling and shadow */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .interactive-logo:hover {
+    /* Makes it 8% larger on hover */
+    transform: scale(1.08);
+    /* Adds a subtle 'lift' effect using a shadow filter */
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+  }
+</style>

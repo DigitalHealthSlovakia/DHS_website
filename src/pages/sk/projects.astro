@@ -1,54 +1,82 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const title = "Projekty | Digital Health Slovakia";
+const description = "Medzinárodné a národné iniciatívy vedené spoločnosťou Digital Health Slovakia.";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Projects | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main class="container">
-			<h1>Aktuálne projekty</h1>
-			<p>Digital Health Slovakia sa aktívne podieľa na niekoľkých medzinárodných a národných iniciatívach.</p>
+<BaseLayout title={title} description={description}>
+  
+  <div class="content-wrapper" style="padding-top: 2rem;">
+    
+    <header data-animate>
+      <h1>AKTUÁLNE PROJEKTY</h1>
+      <p class="mission-p">
+        Digital Health Slovakia sa aktívne zapája do viacerých medzinárodných a národných iniciatív.
+      </p>
+    </header>
 
-			<section class="project-list">
-				<div class="project-card">
-					<h2>XIA Project</h2>
-					<p>
-						Extending the use of the European Electronic Health Record Exchange Format (EEHRxF). 
-						This project focuses on improving cross-border health data exchange.
-					</p>
-					<a href="https://xia-project.iscte-iul.pt/" target="_blank" rel="noopener noreferrer" class="project-link">
-						Navštíviť webovú stránku projektu →
-					</a>
-				</div>
-			</section>
-		</main>
-		<Footer />
+    <section style="margin-top: 4rem;" data-animate>
+      <div style="margin-bottom: 2rem;">
+        <h2>XiA Project</h2>
+        <p class="mission-p">
+          Projekt XiA (Xpanding Innovative Alliance) je európska iniciatíva zameraná na praktickú implementáciu Európskeho priestoru pre zdravotné údaje (EHDS). Projekt reaguje na technické a odborné výzvy v oblasti interoperability vývojom špecializovaného pedagogického rámca a systému mikrocertifikátov. Sústredením sa na európsky formát výmeny elektronických zdravotných záznamov (EEHRxF) buduje XiA vzdelávaciu infraštruktúru a akreditačné štandardy potrebné pre IT špecialistov a poskytovateľov zdravotnej starostlivosti v rámci zjednoteného cezhraničného ekosystému digitálneho zdravotníctva.
+        </p>
+      </div>
 
-		<style>
-			.container { max-width: 800px; margin: 0 auto; padding: 2rem; }
-			.project-list { margin-top: 2rem; }
-			.project-card { 
-				border: 1px solid #e2e8f0; 
-				padding: 1.5rem; 
-				border-radius: 12px; 
-				background: #f8fafc;
-				border-left: 5px solid #0056b3; 
-			}
-			.project-link { 
-				display: inline-block; 
-				margin-top: 1rem; 
-				color: #0056b3; 
-				font-weight: bold; 
-				text-decoration: none;
-			}
-			.project-link:hover { text-decoration: underline; }
-		</style>
-	</body>
-</html>
+      <div style="display: flex; justify-content: center;">
+        <a href="https://xia-project.iscte-iul.pt/" target="_blank" rel="noopener noreferrer" class="project-image-link">
+          <img 
+            src="/images/XiA-Launch_Surveys-1024x577.png" 
+            alt="Stránka projektu XiA" 
+            class="project-banner cinematic-lift"
+          />
+        </a>
+      </div>
+    </section>
+
+    <div style="margin-bottom: 8rem;"></div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .project-banner {
+    /* SIZING RESTORED */
+    width: 100%;
+    max-width: 900px; 
+    height: auto;
+    border-radius: 15px;
+    
+    /* GLOBAL STYLE OVERRIDE */
+    display: block;
+    margin: 0 auto;
+    
+    /* THE CINEMATIC BASE */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: 
+      transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+      box-shadow 0.5s ease;
+  }
+
+  .project-image-link {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  /* THE HOVER */
+  .project-image-link:hover .project-banner {
+    /* Scale + Lift */
+    transform: scale(1.03) translateY(-10px);
+    
+    /* Deep Purple Glow shadow using your brand variable */
+    box-shadow: 0 30px 60px rgba(75, 0, 130, 0.25);
+  }
+
+  /* Ensuring the text doesn't look weird when the image is centered */
+  @media (max-width: 768px) {
+    header, h2 {
+      text-align: center;
+    }
+  }
+</style>
