@@ -1,62 +1,57 @@
-# Astro Starter Kit: Blog
+# Digital Health Slovakia (DHS) Website
 
-```sh
-npm create astro@latest -- --template blog
-```
+Official website for **Digital Health Slovakia**, built with [Astro](https://astro.build/). This site is localized in English and Slovak and hosted as a static site via a Microsoft 365 / Azure non-profit grant.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📂 Content Management (Where to update what)
 
-Features:
+To update the website's dynamic content, edit the TypeScript files in `src/data/`. You do not need to edit the `.astro` files for standard text/list updates.
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+| Content Area | Data File | Associated Page |
+| :--- | :--- | :--- |
+| **Team Profiles** | `src/data/team.ts` | About Us |
+| **Membership Prices** | `src/data/pricing.ts` | Membership |
+| **Members/Partners** | `src/data/members.ts` | Home / About |
+| **News & Articles** | `src/data/news.ts` | News |
+| **Affiliations** | `src/data/affiliations.ts` | About / Partners |
+| **Supporters** | `src/data/supporters.ts` | Support / Home |
 
-## 🚀 Project Structure
+## 🖼️ Media & Assets
+* **Images:** Located in `public/images/`.
+  * Team photos start with `Tim_`
+  * Member logos start with `Clenovia_`
+  * Partner logos start with `Partneri_`
+  * Supporter logos start with `Podporili_`
+* **Documents:** Located in `public/documents/` (e.g., V2Pv25_DHS.pdf).
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🌍 Localization
+The site uses a folder-based routing system:
+* **English pages:** `src/pages/en/`
+* **Slovak pages:** `src/pages/sk/`
+* **Styles:** All global styling is managed in `src/styles/global.css`.
 
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+## 🛠️ Development Commands
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Use the Visual Studio Code terminal to run the following:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. **Install Dependencies** (Run once after cloning or downloading):
+   bash
+   npm install
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+2. **Start Local Preview** (Real-time updates at localhost:4321):
 
-Any static assets, like images, can be placed in the `public/` directory.
+    Bash
+    npm run dev
 
-## 🧞 Commands
+3. **Build Website** (Generates static files for deployment):
 
-All commands are run from the root of the project, from a terminal:
+    Bash
+    npm run build
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🔒 Security Notes
+    Privacy: Do you not commit private API keys or personal contact numbers to the GitHub repository.
 
-## 👀 Want to learn more?
+    Deployment: This site is set up for static hosting. Ensure all assets are in the public/ folder before building.
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Maintained by: Digital Health Slovakia - Michal Juhás
 
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Contact: info@digitalhealthslovakia.com

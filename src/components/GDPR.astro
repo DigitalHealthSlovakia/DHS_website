@@ -1,26 +1,78 @@
 ---
 // GDPR.astro
-// Shows a GDPR cookie banner for European compliance
+const lang = Astro.url.pathname.startsWith('/sk') ? 'sk' : 'en';
+const text = {
+  en: { msg: "This website uses cookies for a better experience.", btn: "Accept" },
+  sk: { msg: "Tento web používa súbory cookies na zlepšenie zážitku.", btn: "Prijať" }
+};
 ---
-<div id="cookie-banner">
-  <p>
-    This website uses cookies for a better experience.
-    <button id="accept-cookies">Accept</button>
-  </p>
+<div id="cookie-banner" style="display: none;">
+  <div class="cookie-inner">
+    <span>{text[lang].msg}</span>
+    <button id="accept-cookies">{text[lang].btn}</button>
+  </div>
 </div>
 
-<script>
-  const banner = document.getElementById('cookie-banner');
-  const btn = document.getElementById('accept-cookies');
-
-  // Show banner only if cookies not accepted
-  if (!localStorage.getItem('cookiesAccepted')) {
-    banner.classList.add('show');
+<style>
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(42, 6, 107, 0.98); /* The Boss's Purple */
+    color: white;
+    padding: 15px 20px;
+    z-index: 99999; 
+    border-top: 2px solid #8134af;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
   }
+  .cookie-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    font-size: 0.9rem;
+  }
+  #accept-cookies {
+    background: white;
+    color: #2a066b;
+    border: none;
+    padding: 8px 25px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    transition: 0.2s;
+  }
+  #accept-cookies:hover {
+    background: #8134af;
+    color: white;
+  }
+  @media (max-width: 768px) {
+    .cookie-inner { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
 
-  // Accept button
-  btn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    banner.classList.remove('show');
-  });
+<script is:inline>
+  // This ensures the script runs correctly every time
+  function initCookies() {
+    const banner = document.getElementById('cookie-banner');
+    const btn = document.getElementById('accept-cookies');
+
+    if (!localStorage.getItem('cookiesAccepted')) {
+      if (banner) banner.style.display = 'block';
+    }
+
+    if (btn && banner) {
+      btn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        banner.style.display = 'none';
+      });
+    }
+  }
+  // Run on initial load
+  initCookies();
 </script>

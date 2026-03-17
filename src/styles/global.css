@@ -2,11 +2,12 @@
    1. CORE VARIABLES & BASE RESET
    ============================================================ */
 :root {
-  --purple-main: #4b0082;
+  --purple-main: #2a066b;
   --accent-purple: #8134af;
-  --navy-dark: #1a1a3a;
+  --navy-dark: #1e1b2e;
   --white: #ffffff;
-  --text-dark: #333333;
+  --text-dark: #1a1a1a;
+  --text-muted: #5c5c70;
 }
 
 * { 
@@ -123,7 +124,7 @@ h2 {
    5. COLOR BARS (Breakout to Edges)
    ============================================================ */
 .navy-divider {
-  background-color: var(--navy-dark);
+  background-color: #4c328c; /* modified to not be dark navy as per ESa comments */
   color: var(--white);
   padding: 16px 0;
   text-align: center;
@@ -255,43 +256,7 @@ h2 {
 }
 
 /* ============================================================
-   8. GDPR COOKIE BANNER (Full Text Restore)
-   ============================================================ */
-#cookie-banner {
-  position: fixed;
-  bottom: 0; left: 0; width: 100%;
-  background: var(--navy-dark);
-  color: var(--white);
-  padding: 25px 20px;
-  z-index: 10000;
-  text-align: center;
-  border-top: 5px solid var(--accent-purple);
-}
-
-.cookie-content-box {
-  max-width: 1000px;
-  margin: 0 auto;
-  font-size: 0.95rem;
-}
-
-#cookie-banner button {
-  background: var(--accent-purple);
-  color: var(--white);
-  border: none;
-  padding: 12px 45px;
-  font-weight: 700;
-  cursor: pointer;
-  text-transform: uppercase;
-  margin-top: 15px;
-  transition: 0.3s;
-}
-
-#cookie-banner button:hover {
-  background: var(--purple-main);
-}
-
-/* ============================================================
-   9. ANIMATIONS & RESPONSIVE
+   8. ANIMATIONS & RESPONSIVE
    ============================================================ */
 [data-animate] {
   opacity: 0;
@@ -318,7 +283,7 @@ h2 {
 
 
 /* ============================================================
-   10. MEMBERSHIP Specific Parts
+  9. MEMBERSHIP Specific Parts
    ============================================================ */
 /* 1. Custom Bullet List (Using the purple checkmark logic) */
 .benefits-list li {
