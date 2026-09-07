@@ -1,91 +1,287 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { newsArticles } from '../../data/news';
+import { newsArticles, CATEGORY_LABELS } from '../../data/news';
 
-const title = "Aktuality | Digital Health Slovakia";
-const today = new Date();
+const lang = 'sk'; // Set to 'sk' in src/pages/sk/news.astro
+const pageTitle = lang === 'sk' ? "Správy & Podujatia | Digital Health Slovakia" : "News & Events | Digital Health Slovakia";
 
-// 1. Logic: Show if it's an "EVENT" (regardless of date) OR if the news date has passed
-const visibleNews = newsArticles
-  .filter(article => {
-    const articleDate = new Date(article.date);
-    // This ensures the DHS Forum stays visible even if it's in the future
-    return article.category.includes("EVENT") || articleDate <= today;
-  })
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-
-// 2. Pagination for the first page
-const postsPerPage = 5;
-const firstPageNews = visibleNews.slice(0, postsPerPage);
-const totalPages = Math.ceil(visibleNews.length / postsPerPage);
+// 1. Pinned/Featured items first (sorted by date among themselves)
+// 2. All remaining items sorted by date (newest first)
+const sortedNews = [...newsArticles].sort((a, b) => {
+  if (a.featured && !b.featured) return -1;
+  if (!a.featured && b.featured) return 1;
+  return new Date(b.date).valueOf() - new Date(a.date).valueOf();
+});
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={pageTitle}>
   <div class="content-wrapper" style="padding-top: 2rem;">
-    
     <header data-animate>
-      <h1>AKTUALITY</h1>
+      <h1>{lang === 'sk' ? 'SPRÁVY A PODUJATIA' : 'NEWS & EVENTS'}</h1>
     </header>
 
-    <div class="news-container" style="margin-top: 4rem;">
-      {firstPageNews.map((article) => (
-        <div class="news-item" data-animate style="margin-bottom: 5rem;">
-          <span class="news-kicker">{article.category}</span>
-          
-          <p class="mission-p" style="margin-top: 0.5rem;">
-            <span>{article.content}</span>
+    <div class="news-container">
+      {sortedNews.map((article) => {
+        const categoryLabel = CATEGORY_LABELS[article.categoryKey][lang];
+        const isFeatured = article.featured;
+        const isUpcoming = article.isUpcoming;
+
+        return (
+          <article 
+            class={`news-card ${isFeatured ? 'featured' : ''}`} 
+            data-animate
+          >
+            <div class="news-meta">
+              <span class="news-date">{article.displayDate[lang]}</span>
+              <span class="news-category">{categoryLabel}</span>
+              {isUpcoming && (
+                <span class="upcoming-badge">
+                  {lang === 'sk' ? 'Pripravované podujatie' : 'Upcoming Event'}
+                </span>
+              )}
+            </div>
+
+            <h2 class="news-title">{article.title[lang]}</h2>
             
-            <a href={article.link} target="_blank" class="news-inline-link">
-              <strong>{article.linkText}</strong>
-            </a>
+            <p class="news-description">{article.description[lang]}</p>
 
-            {article.additionalText && <span>{article.additionalText}</span>}
-
-            {article.secondaryLink && (
-              <a href={article.secondaryLink} target="_blank" class="news-inline-link">
-                {article.secondaryLinkText}
-              </a>
+            {article.images && article.images.length > 0 && (
+              <div class="news-gallery">
+                {article.images.map((imgSrc) => (
+                  <img 
+                    src={imgSrc} 
+                    alt={article.title[lang]} 
+                    class="news-image expandable-image" 
+                    loading="lazy"
+                    onclick={`openLightbox('${imgSrc}', '${article.title[lang].replace(/'/g, "\\'")}')`}
+                  />
+                ))}
+              </div>
             )}
-          </p>
-        </div>
-      ))}
-    </div>
 
-    {/* Only show pagination if there is more than one page */}
-    {totalPages > 1 && (
-      <nav class="pagination">
-        <span>Page 1 of {totalPages}</span>
-        <a href="/en/news/2">Staršie správy &rarr;</a>
-      </nav>
-    )}
+            <div class="news-actions">
+              {article.link && article.linkText && (
+                <a href={article.link} target="_blank" rel="noopener noreferrer" class="news-link">
+                  {article.linkText[lang]} &rarr;
+                </a>
+              )}
+              {article.secondaryLink && article.secondaryLinkText && (
+                <a href={article.secondaryLink} target="_blank" rel="noopener noreferrer" class="news-link secondary">
+                  {article.secondaryLinkText[lang]} &rarr;
+                </a>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Lightbox Modal Container -->
+  <div id="image-lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" class="lightbox-content" src="" alt="" />
+    <div id="lightbox-caption" class="lightbox-caption"></div>
   </div>
 </BaseLayout>
 
 <style>
-  .news-kicker {
-    display: block;
-    color: var(--purple-main);
-    font-weight: 800;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-  }
-  .news-inline-link {
-    color: var(--purple-main);
-    text-decoration: underline;
-    transition: opacity 0.2s ease;
-  }
-  .news-inline-link:hover { opacity: 0.7; }
-  .news-item { border-bottom: 1px solid #eee; padding-bottom: 3rem; }
-  .news-item:last-child { border-bottom: none; }
-  .pagination {
+  .news-container {
+    margin-top: 3rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 2px solid #eee;
-    font-weight: bold;
+    flex-direction: column;
+    gap: 2.5rem;
   }
-  .pagination a { color: var(--purple-main); text-decoration: none; }
+
+  .news-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 2rem;
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  }
+
+  /* Featured / Flagship styling */
+  .news-card.featured {
+    border: 2px solid var(--purple-main, #6b46c1);
+    background: linear-gradient(135deg, #f3e8ff 0%, #ffffff 100%);
+    box-shadow: 0 4px 14px rgba(107, 70, 193, 0.15);
+  }
+
+  .news-card.featured .news-title {
+    color: var(--purple-main, #6b46c1);
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .news-category {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--purple-main, #6b46c1);
+    letter-spacing: 0.05em;
+  }
+
+  .upcoming-badge {
+    background-color: #e0e7ff;
+    color: #3730a3;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .news-title {
+    font-size: 1.4rem;
+    margin: 0.5rem 0 1rem 0;
+    color: #1e293b;
+    line-height: 1.3;
+  }
+
+  .news-description {
+    color: #334155;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .news-gallery {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    overflow-x: auto;
+  }
+
+  .news-image {
+    width: 100%;
+    max-width: 400px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  /* Expandable Image Cursor */
+  .expandable-image {
+    cursor: zoom-in;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .expandable-image:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+
+  /* Lightbox Overlay Styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+  }
+
+  .lightbox-caption {
+    margin-top: 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    text-align: center;
+    max-width: 80%;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .lightbox-close:hover {
+    color: var(--purple-main, #6b46c1);
+  }
+
+  .news-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .news-link {
+    color: var(--purple-main, #6b46c1);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .news-link:hover {
+    color: #4c1d95;
+    text-decoration: underline;
+  }
+
+  .news-link.secondary {
+    color: #2563eb;
+  }
 </style>
+
+<script is:inline>
+  function openLightbox(src, caption) {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    if (lightbox && lightboxImg) {
+      lightboxImg.src = src;
+      lightboxImg.alt = caption;
+      if (lightboxCaption) lightboxCaption.textContent = caption;
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('image-lightbox');
+    if (lightbox) {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>

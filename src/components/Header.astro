@@ -4,22 +4,27 @@ import HeaderLink from './HeaderLink.astro';
 const lang = Astro.url.pathname.startsWith('/sk') ? 'sk' : 'en';
 const path = Astro.url.pathname.replace(/^\/(en|sk)/, '');
 
+// =========================================================================
+// TAX SEASON SWITCH: Set to true during tax season (Jan-Apr), false otherwise.
+// =========================================================================
+const SHOW_TAX_SUPPORT_BTN = false;
+
 const nav = {
   en: [
-    { name: "About Us", href: "/about" },
-    { name: "Membership", href: "/membership" },
-    { name: "HL7 Standards", href: "/standards" },
-    { name: "Projects", href: "/projects" },
-    { name: "News", href: "/news" },
-    { name: "Contact", href: "/contact" }
+    { name: "About Us", href: "/about/" },
+    { name: "Membership", href: "/membership/" },
+    { name: "HL7 Standards", href: "/standards/" },
+    { name: "Projects", href: "/projects/" },
+    { name: "News", href: "/news/" },
+    { name: "Contact", href: "/contact/" }
   ],
   sk: [
-    { name: "O nás", href: "/about" },
-    { name: "Členstvo", href: "/membership" },
-    { name: "Štandardy HL7", href: "/standards" },
-    { name: "Projekty", href: "/projects" },
-    { name: "Aktuality", href: "/news" },
-    { name: "Kontakt", href: "/contact" }
+    { name: "O nás", href: "/about/" },
+    { name: "Členstvo", href: "/membership/" },
+    { name: "Štandardy HL7", href: "/standards/" },
+    { name: "Projekty", href: "/projects/" },
+    { name: "Aktuality", href: "/news/" },
+    { name: "Kontakt", href: "/contact/" }
   ]
 };
 ---
@@ -39,25 +44,30 @@ const nav = {
         </nav>
 
         <div class="header-actions">
-            <HeaderLink href={`/${lang}/support`} class="support-purple-btn">
-                {lang === 'sk' ? 'Podporte nás (2%)' : 'Support Us'}
-            </HeaderLink>
-            <div class="divider"></div>
-                <div class="flag-group">
-                    <a href={`/sk${path}`}>
-                        <img src="https://flagcdn.com/w40/sk.png" alt="SK" class="nav-flag" />
-                    </a>
-                    <a href={`/en${path}`}>
-                        <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="nav-flag" />
-                    </a>
-                </div>
+            {SHOW_TAX_SUPPORT_BTN && (
+              <>
+                <HeaderLink href={`/${lang}/support/`} class="support-purple-btn">
+                    {lang === 'sk' ? 'Podporte nás (2%)' : 'Support Us'}
+                </HeaderLink>
+                <div class="divider"></div>
+              </>
+            )}
+            
+            <div class="flag-group">
+                <a href={`/sk${path}`}>
+                    <img src="https://flagcdn.com/w40/sk.png" alt="SK" class="nav-flag" />
+                </a>
+                <a href={`/en${path}`}>
+                    <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="nav-flag" />
+                </a>
+            </div>
         </div>
     </div>
 </header>
 
 <style>
     .site-header {
-        background-color: #2a066b !important; /* Changes to Purple as per ESa  */
+        background-color: #2a066b !important;
         border-bottom: 4px solid #8134af;
         position: sticky;
         top: 0;
@@ -121,7 +131,7 @@ const nav = {
         font-size: 0.8rem;
         text-transform: uppercase;
         text-decoration: none;
-        white-space: nowrap; /* Prevents text wrapping */
+        white-space: nowrap;
     }
 
     .support-purple-btn:hover {
@@ -138,28 +148,29 @@ const nav = {
     .flag-group {
         display: flex;
         gap: 12px;
-        min-width: 60px; /* Forces space for the flags */
+        min-width: 60px;
     }
 
-    /* CRITICAL FIX: Explicit dimensions to prevent collapsing to 0px */
-    .flag-group img {
-        width: 24px !important;
+    .flag-group img,
+    .nav-flag {
+        width: 28px !important;
         height: auto !important;
         display: block !important;
         border: 1px solid #333;
-        opacity: 1 !important; /* Ensure they aren't hidden by global opacity */
+        opacity: 1 !important;
     }
 
-    /* Responsive fallback */
+    /* Responsive Adjustments */
     @media (max-width: 1100px) {
-        .main-nav { display: none; } /* Hide menu on small screens to keep logo/flags visible */
+        .main-nav { display: none; } /* Hides navigation links on tablet/mobile screens */
         .header-container { padding: 0 20px; }
     }
-    
-    .nav-flag {
-    width: 28px !important;
-    height: auto !important;
-    display: block !important;
-    border: 1px solid #333;
+
+    /* Mobile specific adjustments to avoid button overflow */
+    @media (max-width: 640px) {
+        .support-purple-btn,
+        .divider {
+            display: none; /* Hides the 2% tax button on small mobile screens to keep logo and flags clean */
+        }
     }
 </style>
